@@ -1,8 +1,11 @@
 <html>
 <?php
-include 'classes/user.class.php';
-include 'classes/registered_user.class.php';
-include 'classes/admin_user.class.php';
+function autoLoad($class)
+{
+	include_once('/class/'.$class.'.class.php')
+}
+spl_autoload_register('autoLoad');
+
 ?>
 <head></head>
 <body>
