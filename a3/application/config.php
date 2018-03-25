@@ -5,5 +5,5 @@ define('BASE_URL', 'http://corsair.cs.iupui.edu:22041/CIT313/SP2018/a3/');
 //database info
 define('DB_HOST', 'localhost');
 define('DB_USER', 'nthacker');
-define('DB_PASS', 'Then it is an even fight2');
-define('DB_NAME', 'sp18_31300_nthacker');
+define('DB_PASS', '31gabbie');
+define('DB_NAME', 'nthacker_db');
