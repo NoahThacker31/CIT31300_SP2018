@@ -14,14 +14,30 @@
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
+      /* Stylize the tables */
+      table
+      {
+        width: 600px;
+        margin: auto auto;
+      }
+      input[type="text"], input[type="password"]
+      {
+        width: 250px;
+        height: 26px;
+      }
+      input[type="submit"]
+      {
+        display: block;
+        margin: 0 39%;
+      }
     </style>
     <link href="<?php echo BASE_URL?>views/css/bootstrap-responsive.css" rel="stylesheet">
-      <?php 
-      if($u->isAdmin()) {
-        ?>
+
+      <?php
+        if($u->isAdmin())
+        {?>
         <link rel="stylesheet" href="<?php echo BASE_URL?>application/plugins/tinyeditor/tinyeditor.css">
-       <?php 
-      }
+      <?php }
       ?>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -52,46 +68,38 @@
             <ul class="nav">
               <li class="active"><a href="<?php echo BASE_URL?>">Home</a></li>
               <li><a href="<?php echo BASE_URL?>blog/">Blog</a></li>
-              <li><a href="<?php echo BASE_URL?>members/">Members</a></li>
+              <li><a href="<?php echo BASE_URL?>members/">Members Area</a></li>
             </ul>
 
-            <?php 
-            if($u->isRegistered()) {
-              ?>
-                <ul class="nav pull-right">
-                  <li class="dropdown">
-                      <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                          <?php echo $u->getUserName();?><b class="caret"></b>
-                      </a>
-                        <ul class="dropdown-menu" role="menu">
-
-                        <?php 
-                        if($u->isAdmin()) {
-                        ?>
-                      <li>
-                          <a href="<?php echo BASE_URL?>addpost/">Add Blog Post</a>
-                      </li>
-                     <?php 
-                      }
-                     ?>
-                        <li>
-                            <a href="<?php echo BASE_URL?>login/logout/">Log Out</a>
-                        </li>
-                        </ul>
-                  </li>
-                </ul>
-              <?php
-            }
-            else {
-              ?>
-              <ul class="nav pull-right">
-              <li><a href="<?php echo BASE_URL?>login/">Login</a></li>
-              <li><a href="<?php echo BASE_URL?>register/">Register</a></li>
-            </ul>
-              <?php
-            }
+            <?php
+              if($u->isRegistered()){
             ?>
-
+               <ul class="nav pull-right">
+                   <li class="dropdown">
+                       <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                           <?php echo $u->getUserName();?><b class="caret"></b>
+                       </a>
+                       <ul class="dropdown-menu" role="menu">
+                           <?php
+                               if($u->isAdmin()){?>
+                               <li>
+                                   <a href="<?php echo BASE_URL?>addpost/">Add Blog Post</a>
+                               </li>
+                           <?php }?>
+                           <li>
+                               <a href="<?php echo BASE_URL?>login/logout/">Log Out </a>
+                           </li>  
+                       </ul>
+                   </li>
+               </ul>
+            <?php
+            } else {
+            ?>
+              <ul class="nav pull-right">
+                  <li><a href="<?php echo BASE_URL?>login/">Login</a></li>
+                  <li><a href="<?php echo BASE_URL?>register/">Register</a></li>
+              </ul>
+            <?php }?>
           </div><!--/.nav-collapse -->
         </div>
       </div>

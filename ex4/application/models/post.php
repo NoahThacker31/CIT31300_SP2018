@@ -1,81 +1,63 @@
 <?php
 class Post extends Model{
+	
+	function getPost($pID){
 
-    function getPost($pID){
-        $sql = 'SELECT p.pID, p.title, p.content, p.uid, p.categoryid, p.date, c.name as name, u.first_name, u.last_name FROM posts p
-		INNER JOIN categories c on c.categoryid = p.categoryid
-		INNER JOIN users u on u.uid = p.uid
-		WHERE p.pID = ?
-		';
-        $results = $this->db->getrow($sql, array($pID));
+		$sql =  "SELECT t1.pID, t1.title, t1.content, t1.date, t1.uID, t1.categoryID,
+                         t2.uID, t2.first_name, t2.last_name,
+                         t3.categoryID, t3.name FROM posts t1 INNER JOIN users t2 INNER JOIN categories t3 ON 
+                         t1.uID = t2.uID AND t1.categoryID = t3.categoryID WHERE t1.pID = ?";
+		
+		// perform query
+		$results = $this->db->getrow($sql, array($pID));
+		
+		$post = $results;
+	
+		return $post;
+	
+	}
+		
+	public function getAllPosts($limit = 0){
+		
+		if($limit > 0){
+			
+			$numposts = ' LIMIT '.$limit;
+		}
+		
+		$sql =  "SELECT t1.pID, t1.title, t1.content, t1.date, t1.uID, t1.categoryID,
+                         t2.uID, t2.first_name, t2.last_name,
+                         t3.categoryID, t3.name FROM posts t1 INNER JOIN users t2 INNER JOIN categories t3 ON 
+                         t1.uID = t2.uID AND t1.categoryID = t3.categoryID";
 
-        $post = $results;
 
-        return $post;
+		// perform query
+		$results = $this->db->execute($sql);
 
-    }
+		while ($row=$results->fetchrow()) {
+			$posts[] = $row;
+		}
 
-    public function getUserPosts($uID){
+		return $posts;
+	
+	}
+	
+	public function addPost($data){
+		
+		$sql='INSERT INTO posts (title,content,categoryID,date,uID) VALUES (?,?,?,?,?)'; 
+		$this->db->execute($sql,$data);
+		$message = 'Post added.';
+		return $message;
+		
+	}
 
-        $sql = 'select * from posts where uID = ?';
+        public function editPost($pID,$data){
 
-        $results = $this->db->execute($sql, $uID);
-
-        while ($row=$results->fetchrow()) {
-            $posts[] = $row;
+                $sql = 'UPDATE posts SET title=?, content=?, categoryID=?, date=? WHERE pID = '.$pID;
+                echo 'The sequel statement is '.$sql."<br><br>";
+		$this->db->execute($sql,$data);
+		$message = 'Post Updated.';
+		return $message;
         }
-
-        return $posts;
-    }
-
-    public function getCatPosts($cID){
-
-        $sql = 'select * from posts where categoryID = ?';
-
-        $results = $this->db->execute($sql, $cID);
-
-        while ($row=$results->fetchrow()) {
-            $posts[] = $row;
-        }
-
-        return $posts;
-    }
-
-    public function getAllPosts($limit = 0){
-        if($limit > 0){
-
-            $numposts = ' LIMIT '.$limit;
-        }
-
-        $sql =  'SELECT p.pID, p.title, p.content, p.uid, p.categoryid, p.date, c.name as name, u.first_name, u.last_name FROM posts p
-		INNER JOIN categories c on c.categoryid = p.categoryid
-		INNER JOIN users u on u.uid = p.uid'.$numposts;
-
-        // perform query
-        $results = $this->db->execute($sql);
-
-        while ($row=$results->fetchrow()) {
-            $posts[] = $row;
-        }
-
-        return $posts;
-
-    }
-
-    public function addPost($data){
-
-        $sql='INSERT INTO posts (title,content,categoryID,date,uID) VALUES (?,?,?,?,1)';
-        $this->db->execute($sql,$data);
-        $message = 'Post added.';
-        return $message;
-
-    }
-
-    public function updatePost($data) {
-
-        $sql = 'UPDATE posts SET title = ?, content = ?, categoryID = ?, date = ? where pID = ?';
-        $this->db->execute($sql, $data);
-        $message = "Post updated.";
-        return $message;
-    }
+	
+	
 }

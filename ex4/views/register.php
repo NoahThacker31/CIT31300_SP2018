@@ -1,25 +1,24 @@
-<?php
-require_once ('application/config.php');
-include('elements/header.php');
-?>
-
-<div class="container">
-	<div class="page-header">
-   <h1>Register</h1>
-   
-   <?php if($message){?>
-    <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    	<?php echo $message?>
-    </div>
-  <?php }?>
-
-<?php include ('elements/registration_form.php');
-echo '<p><a href="'.BASE_URL.'">Back to home page</a></p>';
-?>
-
-</div>
-</div>
-
-<?php include('elements/footer.php');
-?>
+<?php include('elements/header.php'); ?>
+<form action="<?php echo BASE_URL; ?>register/add" method="POST">
+    <table>
+        <?php
+        if($message) 
+        {
+             echo '<tr><td colspan="2"><div class="alert alert-success"
+>'.$message.'</div></td></tr>';
+        }
+        ?>
+        <tr>
+            <td>First Name: <input name="first_name" type="text" /></td>
+            <td> Last Name: <input name="last_name" type="text" /></td>
+        </tr>
+        <tr>
+            <td>     Email: <input name="email" type="text" /></td>
+            <td>  Password: <input name="password" type="password" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Register" /></td>
+        </tr>
+    </table>
+</form>
+<?php include('elements/footer.php');?>
