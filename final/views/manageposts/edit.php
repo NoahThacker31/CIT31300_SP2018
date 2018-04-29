@@ -10,7 +10,6 @@
 			<?php echo $message?>
 		</div>
 	<?php }?>
-
 	<div class="row">
 		<div class="span8">
 			<form action="<?php echo BASE_URL?>manageposts/<?php echo $task?>" method="post" onsubmit="editor.post()">
@@ -35,7 +34,7 @@
 				</select>
 				<label>Content</label>
 				<textarea id="tinyeditor" name="content" style="width:556px;height: 200px"><?php echo $content?></textarea>
-				<br/>
+    			<br/>
 				<input type="hidden" name="pID" value="<?php echo $pID?>"/>
 				<button id="submit" type="submit" class="btn btn-primary" >Submit</button>
 			</form>

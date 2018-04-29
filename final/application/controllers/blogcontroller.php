@@ -1,18 +1,18 @@
 <?php
 class BlogController extends Controller{
 	public $postObject;
-
+	
    	public function post($pID){
 		$this->postObject = new Post();
 		$post = $this->postObject->getPost($pID);	    
-	  	$this->set('post',$post);
+		$this->set('post',$post);
    	}
 	
 	public function index(){
 		$this->postObject = new Post();
 		$posts = $this->postObject->getAllPosts();
 		$this->set('title', 'The Default Blog View');
-		$this->set('posts',$posts);	
+		$this->set('posts',$posts);
 	}
 	
 	public function add_comment() {
@@ -29,5 +29,5 @@ class BlogController extends Controller{
 		$response = $this->commentObject->removeComment($data);
 		$this->set('message',$response);
 		$this->set('response',$_POST['postID']);
-	}
+	}	
 }

@@ -20,7 +20,7 @@ class Categories extends Model{
 		$outcome = $this->db->getrow($sql,array($cID));
 		return $outcome;
 	}
-	
+
 	public function update($cID,$name){
 		$categoryID = $this->db->qstr($cID);
 		$categoryName = $this->db->qstr($name);
@@ -28,7 +28,7 @@ class Categories extends Model{
 		$results = $this->db->execute($sql);
 		return $results;
 	}
-	
+
 	public function addCategory($category){
 		$sql = "INSERT INTO categories (name) VALUES (?)";
 		$outcome = $this->db->execute($sql, $category);

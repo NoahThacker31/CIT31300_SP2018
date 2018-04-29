@@ -4,10 +4,10 @@ class ManagePostsController extends Controller{
     protected $access = "1";
 	
 	public function index() {
-		
-	}
-	
-	public function add(){
+
+    }
+
+    public function add(){
 		$this->postObject = new Post();
 		$this->getCategories();
 		$this->set('task', 'save');
@@ -31,7 +31,7 @@ class ManagePostsController extends Controller{
 		$this->set('date', $post['date']);
 		$this->set('category', $post['categoryID']);
 		$this->set('task', 'update');
-	}
+	}	
 	
 	public function getCategories(){
 		$this->postObject = new Categories();
@@ -41,7 +41,7 @@ class ManagePostsController extends Controller{
 	
 	public function update(){
 		$data = array('title'=>$_POST['title'],'content'=>$_POST['content'],'category'=>$_POST['category'],'date'=>$_POST['date'],'pID'=>$_POST['pID']);
-		$this->postObject = new Post();		
+		$this->postObject = new Post();
 		$result = $this->postObject->updatePost($data);
 		$outcome = $this->postObject->getAllPosts();
 		$this->set('posts',$outcome);

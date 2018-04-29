@@ -1,35 +1,36 @@
 <?php
 class LoginController extends Controller{
-	public $userObject;
+	public $user;
+	public $success;
 	
-	public function index()
-	{
-		
-	}
-	
-	public function do_login()
-	{
-		$this->userObject = new Users();
-		if($this->userObject->checkUser($_POST['email'],$_POST['password']))
-		{
-           $userInfo = $this->userObject->getUserFromEmail($_POST['email']);  
-           $_SESSION['uID'] = $userInfo['uID'];
-		   if(strlen($_SESSION['redirect']) > 0 ) {
-			   $view = $_SESSION['redirect'];
-			   unset($_SESSION['redirect']);
-			   header('location: '.BASE_URL.$view);
-		   } else {
-			   header('location: '.BASE_URL);
-		   }
+	public function do_login() {	
+		$this->user = new User();
+		$data = array('email'=>$_POST['email'],'password'=>$_POST['password']);
+		$message = "Login Failed - Username/Email or Password Incorrect";
+		if($this->user->checkUser($data)) {
+			$message = "Login Successful";
+			$_SESSION['uID'] = $this->user->getUserFromEmail($_POST['email']);
+		}
+		$this->set('message', $message);
+		if(strlen($_SESSION['redirect']) > 0) {
+			$view = $_SESSION['redirect'];
+			unset($_SESSION['redirect']);
+			header('Location: '.BASE_URL.$view.'/');
 		} else {
-			$this->set('error','Wrong Username / Email and Password Combination');
+			header('Location: '.BASE_URL);	
 		}
 	}
 	
-	public function logout()
-	{
+	public function logout() {
 		unset($_SESSION['uID']);
-		session_write_close();
-		header('location: '.BASE_URL);
+		$this->set('message', 'Successfully Logged Out!');
+		$_SESSION['message'] = 'Successfully Logged Out!';
+		if(strlen($_SESSION['redirect']) > 0) {
+			$view = $_SESSION['redirect'];
+			unset($_SESSION['redirect']);
+			header('Location: '.BASE_URL.$view.'/');
+		} else {
+			header('Location: '.BASE_URL);	
+		}
 	}
 }

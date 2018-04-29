@@ -7,3 +7,4 @@
 </div>
 
 <?php include('views/elements/footer.php');?>
+    

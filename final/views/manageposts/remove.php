@@ -1,12 +1,11 @@
 <?php include('views/elements/header.php'); ?>
 
-<?php
-if( is_array($post) ) {
+<?php if( is_array($post) ) {
     extract($post);
 }?>
 
 <div class="container">
-    <div class="page-header">
+	<div class="page-header">
 		<h1>Delete Post</h1>
 	</div>
 	<h2><?php echo $title;?></h2>
@@ -20,4 +19,4 @@ if( is_array($post) ) {
 	</div>
 </div>
 
-<?php include('views/elements/footer.php');?>
+<?php include('views/elements/footer.php'); ?>

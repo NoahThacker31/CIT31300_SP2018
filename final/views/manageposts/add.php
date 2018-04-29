@@ -2,7 +2,7 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Add Post</h1>
+		<h1>Add SPost</h1>
 	</div>
 	<?php if($message){?>
 		<div class="alert alert-success">
@@ -10,15 +10,13 @@
 			<?php echo $message?>
 		</div>
 	<?php }?>
-
 	<div class="row">
 		<div class="span8">
 			<form action="<?php echo BASE_URL?>manageposts/<?php echo $task?>" method="post" onsubmit="editor.post()">
 				<label>Title</label>
 				<input type="text" class="span6" name="title" value="<?php echo $title?>" required="title">
 				<label for="date">Date</label>
-				<?php // set timezone
-				date_default_timezone_set('America/Indiana/Indianapolis');?>
+				<?php date_default_timezone_set('America/Indiana/Indianapolis');?>
 				<input name="date" id="date" size="16" type="date" value="<?php echo $date = date('Y-m-d H:i:s'); ?>">
 				<label for="category">Category</label>
 				<select class="input-sm" name="category" id="category" required="category">

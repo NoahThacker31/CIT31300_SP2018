@@ -1,19 +1,23 @@
-<?php include('view/elements/header.php');?>
+<?php include('views/elements/header.php');?>
 
-<?php if(is_array($post)){
+<?php
+if(is_array($post) ) {
 	extract($post);
-}?>
+} ?>
 
 <div class="container">
 	<div class="page-header">
 		<h1><?php echo $title;?></h1>
+		<?php if($user->isAdmin()) { ?>
+		
+		<?php } ?>
+		<h5>
+			<?php echo strval($last_name.', '.$first_name).' -- '. date('F d, Y',strtotime($date));?>
+		</h5>
 	</div>
-	<p><?php echo $content; ?></p>
-	<sub>
-		<?php echo 'Posted on '.$date.' by <a href="'.BASE_URL.'members/view/'.$uid.'">'. $first_name . ' ' . $last_name . '</a> in <a href="'.BASE_URL.'category/view/'. $categoryid.'">' . $name .'</a>'; ?>
-	</sub>
+	<?php echo $content;?>
 	<h3>Comments:</h3>
 	<div id="comments"></div>
 </div>
 
-<?php include('view/elements/footer.php');?>
+<?php include('views/elements/footer.php');?>

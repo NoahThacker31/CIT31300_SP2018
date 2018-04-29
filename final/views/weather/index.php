@@ -1,6 +1,6 @@
 <?php include('views/elements/header.php'); ?>
 
-<?php if(!$result) { ?>
+<?php if(!$result) {?>
 	<div class="container" id="wx">
 		<div class="page-header">
 			<h1>Weather</h1>
@@ -8,7 +8,7 @@
 		<form method="post" action="<?php echo BASE_URL?>weather/getresults">
 			<label for "zip">Enter Your Zip Code</label>
 			<input type="text" name="zip" id="zip" required="zip"/>
-			</br>
+			<br/>
 			<button type="submit" class="btn">Load Results</button>
 		</form>
 	</div>

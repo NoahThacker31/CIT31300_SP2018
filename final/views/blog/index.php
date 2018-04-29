@@ -4,13 +4,22 @@
 	<div class="container">
 		<div class="page-header">
 			<h1><?php echo $title;?></h1>
-		</div>
+		</div> 
 		<?php foreach($posts as $p){?>
-			<h3><a href="<?php echo BASE_URL?>blog/post/<?php echo $p['pID'];?>" title="<?php echo $p['title'];?>"><?php echo $p['title'];?></a></h3>
-			<sub><?php echo $p['date'] ?> by <a href="<?php echo BASE_URL ?>"><?php echo $p['first_name'].' '.$p['last_name'] ?></a> in <a href="<?php echo BASE_URL ?>/category/view/<?php echo $p['categoryID'] ?>"><?php echo $p['name'] ?></a></sub>
-			<div style="margin-top:15px;"><a href="<?php echo BASE_URL;?>ajax/get_post_content/?pID=<?php echo $p['pID'];?>" class="btn post_loader">View Entire Post</a></div>
+			<h3>
+				<a href="<?php echo BASE_URL?>blog/post/<?php echo $p['pID'];?>" title="<?php echo $p['title'];?>"><?php echo $p['title'];?></a>
+			</h3>
+			<?php if($user->isAdmin()) { ?>
+				
+			<?php } ?>
+			<h5>
+				<?php echo strval($p['last_name'].', '.$p['first_name']).' -- '. date('F d, Y',strtotime($p['date']));?>
+			</h5>
+			<div style="margin-top: 15px">
+				<a href="<?php echo BASE_URL; ?>ajax/get_post_content/?pID=<?php echo $p['pID']; ?>" class="btn post-loader">View Entire Post</a>
+			</div>
 		<?php }?>
 	</div>
-<?php } ?>
+<?php }?>
 
 <?php include('views/elements/footer.php');?>
